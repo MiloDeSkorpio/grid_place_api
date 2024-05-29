@@ -1,43 +1,58 @@
-import { Table, Column,Model,DataType, Default} from 'sequelize-typescript'
+import { Table, Column, Model, DataType, Default } from 'sequelize-typescript'
 
 @Table({
-    tableName:'usuarios'
+    tableName: 'usuarios'
 })
 
 class Usuario extends Model {
     @Column({
-        type: DataType.STRING(100)
+        type: DataType.STRING
     })
     declare nombre: string
     @Column({
-        type: DataType.STRING   
+        type: DataType.STRING
+    })
+    declare apellidoP: string
+    @Column({
+        type: DataType.STRING
+    })
+    declare apellidoM: string
+    @Column({
+        type: DataType.STRING
     })
     declare email: string
+    @Column({
+        type: DataType.STRING
+    })
+    declare telefono: string
 
     @Column({
         type: DataType.STRING
-   })
-   declare password: string
+    })
+    declare password: string
     @Column({
         type: DataType.STRING
-   })
-   declare imgPerfil: string
+    })
+    declare imgPerfil: string
     @Column({
         type: DataType.STRING
-   })
-   declare token: string
+    })
+    declare token: string
+    @Default(false)
     @Column({
         type: DataType.BOOLEAN
-   })
-   declare confirmado: boolean
+    })
+    declare confirmado: boolean
+    @Default(2)
     @Column({
         type: DataType.INTEGER
-   })
-   declare rolId: number
+    })
+    declare rolId: number
+    @Default(false)
     @Column({
-        type: DataType.INTEGER
-   })
-   declare prueba: number
+        type: DataType.BOOLEAN
+    })
+    declare prueba: number
 }
 
 export default Usuario

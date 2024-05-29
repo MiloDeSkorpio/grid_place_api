@@ -28,8 +28,7 @@ export const getUsuarioById = async (req: Request, res: Response) => {
   } catch (error) {
    console.log(error)
   }
- }
-
+}
 export const createUsuario = async (req: Request, res: Response) => {
   try {
     const usuario = await Usuario.create(req.body)
@@ -38,7 +37,6 @@ export const createUsuario = async (req: Request, res: Response) => {
     console.log(error)
   }
 }
-
 export const updateUsuario = async  (req: Request, res: Response) => {
   const { id } = req.params
     const usuario = await Usuario.findByPk(id)
@@ -54,7 +52,6 @@ export const updateUsuario = async  (req: Request, res: Response) => {
     console.log(req.body)
     res.json({data: usuario})
 }
-
 // export const updatePublicado = async  (req: Request, res: Response) => {
 //   const { id } = req.params
 //     const usuario = await Usuario.findByPk(id)
@@ -70,14 +67,14 @@ export const updateUsuario = async  (req: Request, res: Response) => {
 //     res.json({data: usuario})
 // }
 
-export const deleteUsuario = async  (req: Request, res: Response) => {
-  const { id } = req.params
-    const usuario = await Usuario.findByPk(id)
-    if(!usuario){
-      return res.status(404).json({
-        error: 'Usuarioo No Encontrado'
-      });        
-    }
-    await usuario.destroy()
-    res.json({data: 'Usuarioo Eliminado' })
-}
+// export const deleteUsuario = async  (req: Request, res: Response) => {
+//   const { id } = req.params
+//     const usuario = await Usuario.findByPk(id)
+//     if(!usuario){
+//       return res.status(404).json({
+//         error: 'Usuarioo No Encontrado'
+//       });        
+//     }
+//     await usuario.destroy()
+//     res.json({data: 'Usuarioo Eliminado' })
+// }

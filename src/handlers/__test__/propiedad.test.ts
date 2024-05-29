@@ -11,7 +11,6 @@ describe('POST /api/propiedades', () => {
     expect(response.status).not.toBe(404)
     expect(response.body.errors).not.toHaveLength(2)
   })
-
   it('should display that the titulo is not empty', async () => {
     const response = await request(server).post('/api/propiedades').send({
       titulo: '',
@@ -549,7 +548,8 @@ describe('POST /api/propiedades', () => {
       precio: 1700,
       calle: 'Las Flores',
       lat: 19.31855286,
-      lng: -99.4116723
+      lng: -99.4116723,
+      
     })
     expect(response.status).toBe(201)
     expect(response.body).toHaveProperty('data')

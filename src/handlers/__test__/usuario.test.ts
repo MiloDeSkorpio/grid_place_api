@@ -171,5 +171,101 @@ describe('POST /api/usuarios', () => {
     expect(response.status).not.toBe(404)
     expect(response.body.errors).not.toHaveLength(3)
   })
+  it('Should display that the email is not empty', async () => {
+    const response = await request(server).post('/api/usuarios').send({
+      nombre: 'Pedro',
+      apellidoP: 'Ramirez',
+      apellidoM: 'Perez',
+      email: '',
+      telefono: '5510552055',
+      password: '54f56as&'       
+    })
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('errors')
+    expect(response.body.errors).toHaveLength(2)
+
+    expect(response.status).not.toBe(404)
+    expect(response.body.errors).not.toHaveLength(3)
+  })
+  it('Should display that the telefono is not empty', async () => {
+    const response = await request(server).post('/api/usuarios').send({
+      nombre: 'Pedro',
+      apellidoP: 'Ramirez',
+      apellidoM: 'Perez',
+      email: 'correo@correo.com',
+      telefono: '',
+      password: '54f56as&'       
+    })
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('errors')
+    expect(response.body.errors).toHaveLength(2)
+
+    expect(response.status).not.toBe(404)
+    expect(response.body.errors).not.toHaveLength(3)
+  })
+  it('Should display that the telefono is length equal to 10', async () => {
+    const response = await request(server).post('/api/usuarios').send({
+      nombre: 'Pedro',
+      apellidoP: 'Ramirez',
+      apellidoM: 'Perez',
+      email: 'correo@correo.com',
+      telefono: '551055205',
+      password: '54f56as&'       
+    })
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('errors')
+    expect(response.body.errors).toHaveLength(1)
+
+    expect(response.status).not.toBe(404)
+    expect(response.body.errors).not.toHaveLength(3)
+  })
+  it('Should display that the password is length greather than to 5', async () => {
+    const response = await request(server).post('/api/usuarios').send({
+      nombre: 'Pedro',
+      apellidoP: 'Ramirez',
+      apellidoM: 'Perez',
+      email: 'correo@correo.com',
+      telefono: '5510552052',
+      password: '54f'       
+    })
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('errors')
+    expect(response.body.errors).toHaveLength(1)
+
+    expect(response.status).not.toBe(404)
+    expect(response.body.errors).not.toHaveLength(3)
+  })
+  it('Should display that the password is not empty', async () => {
+    const response = await request(server).post('/api/usuarios').send({
+      nombre: 'Pedro',
+      apellidoP: 'Ramirez',
+      apellidoM: 'Perez',
+      email: 'correo@correo.com',
+      telefono: '5510552052',
+      password: ''       
+    })
+    expect(response.status).toBe(400)
+    expect(response.body).toHaveProperty('errors')
+    expect(response.body.errors).toHaveLength(2)
+
+    expect(response.status).not.toBe(404)
+    expect(response.body.errors).not.toHaveLength(3)
+  })
+  it('Should create a new Usuario', async () => {
+    const response = await request(server).post('/api/usuarios').send({
+      nombre: 'Pedro',
+      apellidoP: 'Ramirez',
+      apellidoM: 'Perez',
+      email: 'correo@correo.com',
+      telefono: '5510552052',
+      password: '54f56as&'       
+    })
+    expect(response.status).toBe(201)
+    expect(response.body).toHaveProperty('data')
+
+    expect(response.status).not.toBe(404)
+    expect(response.status).not.toBe(202)
+    expect(response.status).not.toHaveProperty('error')
+  })
 
 })
